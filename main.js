@@ -80,28 +80,71 @@
 // })
 
 // Fungsi untuk menambahkan tugas baru
-function addTask() {
-    const taskInput = document.getElementById("task");
-    const taskText = taskInput.value.trim();
+// function addTask() {
+//     const taskInput = document.getElementById("task");
+//     const taskText = taskInput.value.trim();
 
-    if (taskText !== "") {
-        const taskList = document.getElementById("taskList");
-        const taskItem = document.createElement("li");
-        taskItem.textContent = taskText;
+//     if (taskText !== "") {
+//         const taskList = document.getElementById("taskList");
+//         const taskItem = document.createElement("li");
+//         taskItem.textContent = taskText;
 
-        const deleteButton = document.createElement("button");
-        deleteButton.textContent = "Hapus";
-        deleteButton.onclick = function () {
-            taskItem.remove();
-        };
+//         const deleteButton = document.createElement("button");
+//         deleteButton.textContent = "Hapus";
+//         deleteButton.onclick = function () {
+//             taskItem.remove();
+//         };
 
-        taskItem.appendChild(deleteButton);
-        taskList.appendChild(taskItem);
+//         taskItem.appendChild(deleteButton);
+//         taskList.appendChild(taskItem);
 
-        taskInput.value = "";
+//         taskInput.value = "";
+//     }
+// }
+
+// // Mengambil referensi ke tombol " Tambahkan" dan menambahkan event listener
+// const addButton = document.getElementById("addButton");
+// addButton.addEventListener("click", addTask);
+/* Basic Style */
+
+const button = document.getElementById('tombol_form');
+const input = document.getElementById('input');
+const hasilContainer = document.getElementById('hasil');
+
+button.addEventListener('click', function(){
+    const isi = input.value;
+    if (isi.trim() !== '') {
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+
+        const teks = document.createElement('span');
+        teks.textContent = isi;
+
+        const hapus = document.createElement('span');
+        hapus.textContent = ' X';
+        hapus.className = 'hapus-item'; 
+        hapus.style.cursor = 'pointer';
+        hapus.style.color = 'black';
+        
+        const item = document.createElement('div');
+        item.appendChild(checkbox);
+        item.appendChild(teks);
+        item.appendChild(hapus);
+
+        hasilContainer.appendChild(item);
+
+        input.value = '';
+
+        hapus.addEventListener('click', function() {
+            hasilContainer.removeChild(item);
+        });
+
+        checkbox.addEventListener('change', function() {
+            if (checkbox.checked) {
+                teks.style.textDecoration = 'line-through';
+            } else {
+                teks.style.textDecoration = 'none';
+            }
+        });
     }
-}
-
-// Mengambil referensi ke tombol "Tambahkan" dan menambahkan event listener
-const addButton = document.getElementById("addButton");
-addButton.addEventListener("click", addTask);
+});
